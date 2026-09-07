@@ -1,6 +1,7 @@
 # ==========================================
 # 보안 및 비공개 인증 파일 (절대 커밋 금지)
 # ==========================================
+config/auth/*.json
 precondition/auth/*.json
 auth/*.json
 *.json.key
@@ -11,6 +12,8 @@ auth/*.json
 .env
 .env.*
 !.env.example
+config/.env
+!config/.env.example
 precondition/.env
 !precondition/.env.example
 
