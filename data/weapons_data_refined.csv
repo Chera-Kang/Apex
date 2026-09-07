@@ -1,0 +1,30 @@
+﻿name,name_kor,type,ammo,mag_0,mag_1,mag_2,mag_3,mag_4,dmg,dmg_head,dmg_body,dmg_leg,RPM,DPS
+HAVOC Rifle,하복 소총,AR,Energy Ammo.svg,20,24,28,32,3.2,18,32,18,29,672,202
+VK-47 Flatline,VK-47 플랫라인,AR,Heavy Rounds.svg,19,23,27,29,2.4,18,32,18,29,600,180
+Hemlok Burst AR,헴록 버스트 AR,AR,Heavy Rounds.svg,18,21,24,30,2.4,19,33,19,30,365,116
+R-301 Carbine,R-301 카빈,AR,Light Rounds.svg,21,23,28,31,2.4,13,23,13,22,810,176
+Nemesis Burst AR,네메시스 버스트 AR,AR,Energy Ammo.svg,20,24,28,32,2.7,16,28,16,26,582,155
+Alternator SMG,얼터네이터 SMG,SMG,Light Rounds.svg,19,23,26,28,1.9,16,20,16,19,600,160
+Prowler Burst PDW,프라울러 버스트 PDW,SMG,Heavy Rounds.svg,20,25,30,35,2,15,23,15,21,579,145
+R-99 SMG,R-99 SMG,SMG,Mythic Light Rounds.svg,30,1.62,2.21,19000,,14 max,18 max,14 max,17 max,1080,252 max
+Volt SMG,볼트 SMG,SMG,Energy Ammo.svg,19,21,23,26,1.44,15,19,15,18,720,180
+C.A.R. SMG,C.A.R. SMG,SMG,Heavy Rounds.svg,19,22,24,27,1.7,12,15,12,14,930,186
+Devotion LMG,디보션 LMG,LMG,Mythic Energy Ammo.svg,48,2.88,3.69,33500,,16,24,16,22,900,240
+L-STAR EMG,L-STAR EMG,LMG,Energy Ammo.svg,24,26,28,30,2.45,17,26,17,24,600,170
+M600 Spitfire,M600 스핏파이어,LMG,Light Rounds.svg,35,40,45,50,3.4,18,27,18,25,540,162
+Rampage LMG,램페이지 LMG,LMG,Heavy Rounds.svg,28,32,36,40,3.1,26,39,26,36,300,130
+G7 Scout,G7 스카우트,Marksman,Light Rounds.svg,10,15,18,20,2.16,33,58,33,53,252,139
+Triple Take,트리플 테이크,Marksman,Energy Ammo.svg,6,7,8,10,2.34,63,111,63,102,81,85
+30-30 Repeater,30-30 리피터,Marksman,Heavy Rounds.svg,6,7,8,10,[1],39 min,68 min,39 min,62 min,139 min,90 min
+Charge Rifle,차지 라이플,Sniper,Sniper Ammo.svg,4,5,6,8,3.5,75 min,150 min,75 min,135 min,26,48
+Longbow DMR,롱보우 DMR,Sniper,Sniper Ammo.svg,6,8,10,12,2.66,55,124,55,110,78,72
+Kraber .50-Cal Sniper,크레이버 .50구경 스나이퍼,Sniper,Mythic Sniper Ammo.svg,4,3.2,4.3,29500,,140,280,140,252,25,60
+Sentinel,센티넬,Sniper,Sniper Ammo.svg,4,5,6,7,2.5,70,140,70,126,38,44
+EVA-8 Auto,EVA-8 오토,Shotgun,Shotgun Shells.svg,8,2.75,2.65,2.56,2.48,56,72,56,64,193,180
+Mozambique Shotgun,모잠비크 샷건,Shotgun,Shotgun Shells.svg,6,2.1,2.6,10000,,45,57,45,54,202,152
+Mozambique Shotgun Akimbo,모잠비크 아킴보,Shotgun,Shotgun Shells.svg,12,2.5,3,10000,,45,57,45,54,225,169
+Peacekeeper,피스키퍼,Shotgun,Shotgun Shells.svg,5,2.5,2.42,2.33,2.25,99,126,99,117,51,84
+RE-45 Auto,RE-45 오토,Pistol,Light Rounds.svg,18,20,23,26,1.5,12,18,12,17,780,182
+P2020,P2020,Pistol,Light Rounds.svg,10,11,12,14,1.25,21,32,21,29,420,147
+P2020 Akimbo,P2020 아킴보,Pistol,Light Rounds.svg,20,22,24,28,2.1,21,32,21,29,480,168
+Wingman,윙맨,Pistol,Sniper Ammo.svg,6,2.1,2.1,18000,,45,97,45,86,156,117
