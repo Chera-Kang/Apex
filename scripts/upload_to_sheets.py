@@ -1,72 +1,83 @@
+import os
+import sys
+from pathlib import Path
 import pandas as pd
 import gspread
-import os
+
+# 프로젝트 루트 및 scripts 경로 설정
+CURRENT_DIR = Path(__file__).resolve().parent
+BASE_DIR = CURRENT_DIR.parent
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+
+from config import DATA_DIR, SHEET_URL, CREDS_PATH
 
 def upload_weapons_to_sheets():
-    # 1. Load the CSV data
-    csv_path = 'weapons_data.csv'
-    if not os.path.exists(csv_path):
-        print(f"Error: {csv_path} not found.")
+    # 1. Load the refined CSV data from data directory
+    csv_path = DATA_DIR / 'weapons_data_refined.csv'
+    if not csv_path.exists():
+        print(f"Error: {csv_path} not found. Run apex_crawler.py first.")
         return
 
     try:
         df = pd.read_csv(csv_path)
+        df = df.fillna('-')
     except Exception as e:
         print(f"Error reading CSV: {e}")
         return
 
-    # 2. Clean the data
-    df_clean = df[df['info'] != 'Incomplete data in table'].copy()
-    df_clean = df_clean.dropna(subset=['name'])
-    df_clean = df_clean.fillna('')
-
-    cols_order = [
-        'name', 'type', 'ammo', 'modes', 
-        'damage_body', 'damage_head', 'damage_leg', 
-        'dps', 'rpm', 
-        'mag_base', 'mag_l3', 
-        'reload_tac_base', 'reload_tac_l3', 
-        'reload_full_base', 'reload_full_l3', 
-        'projectile_speed'
-    ]
-    available_cols = [c for c in cols_order if c in df_clean.columns]
-    df_final = df_clean[available_cols]
-
-    # 3. Connect to Google Sheets
-    from config import SHEET_URL, CREDS_PATH
-    creds_path = CREDS_PATH
-    if not os.path.exists(creds_path):
-        print(f"Error: {creds_path} not found.")
+    # 2. Connect to Google Sheets
+    if not os.path.exists(CREDS_PATH):
+        print(f"Error: {CREDS_PATH} not found. Check your config/.env settings.")
         return
     
     try:
         print("Connecting to Google Sheets...")
-        gc = gspread.service_account(filename=creds_path)
-        sheet_url = SHEET_URL
-        doc = gc.open_by_url(sheet_url)
+        gc = gspread.service_account(filename=CREDS_PATH)
+        doc = gc.open_by_url(SHEET_URL)
         
-        # Select the first worksheet
-        worksheet = doc.get_worksheet(0)
-        if not worksheet:
-            worksheet = doc.add_worksheet(title="Weapon Data", rows="100", cols="20")
+        # Select or create the 'Weapon' worksheet
+        try:
+            worksheet = doc.worksheet("Weapon")
+        except Exception:
+            print("Worksheet 'Weapon' not found. Creating it...")
+            worksheet = doc.add_worksheet(title="Weapon", rows="100", cols="25")
 
-        # 4. Prepare data for upload
-        header = [col.replace('_', ' ').title() for col in df_final.columns]
-        values = [header] + df_final.values.tolist()
+        # 3. Prepare data for upload
+        # Headers matching the refined weapon data schema
+        headers = [
+            'name', 'name_kor', 'type', 'ammo', 
+            'mag_0', 'mag_1', 'mag_2', 'mag_3', 
+            'dmg', 'dmg_head', 'dmg_body', 'dmg_leg', 
+            'RPM', 'DPS', 'Reload_time', 'Reload_time(Tactical)',
+            'Projectile_Speed'
+        ]
+        
+        # Filter dataframe for available headers
+        available_headers = [h for h in headers if h in df.columns]
+        if not available_headers:
+            available_headers = list(df.columns)
+            
+        df_final = df[available_headers]
+        values = [available_headers] + df_final.values.tolist()
 
-        # 5. Update the sheet
-        print(f"Uploading {len(df_final)} rows...")
+        # 4. Update the sheet
+        print(f"Updating 'Weapon' sheet with {len(df_final)} weapons...")
         worksheet.clear()
-        worksheet.update('A1', values)
+        worksheet.update(values=values, range_name='A1')
         
-        # Basic Formatting (Column width and Header style)
-        worksheet.format('A1:P1', {
-            "backgroundColor": {"red": 0.15, "green": 0.15, "blue": 0.15},
+        # Basic Formatting
+        col_letter = chr(64 + len(available_headers))
+        worksheet.format(f'A1:{col_letter}1', {
+            "backgroundColor": {"red": 0.1, "green": 0.1, "blue": 0.1},
             "horizontalAlignment": "CENTER",
             "textFormat": {"foregroundColor": {"red": 1.0, "green": 1.0, "blue": 1.0}, "bold": True}
         })
         
-        print(f"Successfully uploaded to: {doc.title}")
+        # Freeze the first row
+        worksheet.freeze(rows=1)
+        
+        print(f"Successfully updated 'Weapon' sheet in: {doc.title}")
         
     except Exception as e:
         import traceback

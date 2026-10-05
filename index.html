@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Info - 에이펙스 레전드 실시간 데이터 & 전술 플랫폼</title>
+  <meta name="description" content="에이펙스 레전드 무기 도감, 레전드 스펙, 실시간 맵 로테이션 및 TTK 계산기 플랫폼">
+  <link rel="stylesheet" href="./src/styles/variables.css?v=1.0.0">
+  <link rel="stylesheet" href="./src/styles/main.css?v=1.0.0">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. In-Game Lobby Style Global Navigation Bar (GNB)
+       ========================================================================= -->
+  <header class="apex-gnb">
+    <!-- Brand Logo -->
+    <a href="#home" class="gnb-brand" id="brand-logo" title="Apex Info 홈으로 이동">
+      <span class="brand-icon"></span>
+      <span class="brand-title">APEX INFO</span>
+      <span class="brand-badge">SEASON 24</span>
+    </a>
+
+    <!-- In-Game Lobby Center Tabs -->
+    <nav class="gnb-nav" id="main-nav" aria-label="메인 로비 메뉴">
+      <button class="nav-tab active" data-target="view-home" data-route="home">홈</button>
+      <button class="nav-tab" data-target="view-weapons" data-route="weapons">무기 도감</button>
+      <button class="nav-tab" data-target="view-legends" data-route="legends">레전드</button>
+      <button class="nav-tab" data-target="view-maps" data-route="maps">맵</button>
+      <button class="nav-tab" data-target="view-calculator" data-route="calculator">계산기</button>
+      <button class="nav-tab" data-target="view-tierlist" data-route="tierlist">티어표</button>
+    </nav>
+
+    <!-- Right Utilities -->
+    <div class="gnb-utilities">
+      <div class="status-badge" title="공식 위키 및 게임 데이터베이스 동기화 완료">
+        <span class="pulse-dot"></span>
+        <span>DB LIVE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Main Content Views (Single Page Tab Switching)
+       ========================================================================= -->
+  <main class="main-container">
+
+    <!-- ───────────────────────────────────────────────────────────────────────
+         VIEW 1: HOME (Lobby Command Center)
+         ─────────────────────────────────────────────────────────────────────── -->
+    <section id="view-home" class="view-section">
+      
+      <!-- Hero Command Center Banner -->
+      <div class="hero-banner">
+        <div class="hero-tag">
+          <span>⚡</span> Command Center &amp; Tactical Intelligence
+        </div>
+        <h1 class="hero-title">Apex Legends Database</h1>
+        <p class="hero-desc">
+          공식 위키 마이닝 데이터 기반 29종 무기 정밀 스펙, 레전드 스킬 수치, 실시간 맵 로테이션 및 TTK 킬타임 시뮬레이터를 제공합니다.
+        </p>
+        <div class="hero-live-ticker">
+          <span class="pulse-dot"></span>
+          <span class="ticker-label">[LIVE MAP]</span>
+          <span class="ticker-value" id="home-ticker-map">올림푸스 (배틀로얄) · 남은 시간 00:24:15</span>
+          <button class="ticker-btn" id="btn-quick-map">➔ 맵 상세 보기</button>
+        </div>
+      </div>
+
+      <!-- Feature Gateway Portals -->
+      <h2 class="section-heading">핵심 기능 바로가기 (Tactical Portals)</h2>
+      <div class="portal-grid">
+        
+        <!-- Portal 1: Weapons Dex -->
+        <article class="portal-card" id="portal-weapons">
+          <div class="portal-icon">🔫</div>
+          <h3 class="portal-title">무기 도감 (Weapons)</h3>
+          <p class="portal-desc">
+            AR, SMG, LMG 등 29종 총기의 헤드/몸통/다리 데미지, RPM(연사력), 탄속, 장전 시간을 실시간 필터링하여 확인하세요.
+          </p>
+          <div class="portal-action">
+            <span>도감 열기</span>
+            <span>➔</span>
+          </div>
+        </article>
+
+        <!-- Portal 2: Legends -->
+        <article class="portal-card card-blue" id="portal-legends">
+          <div class="portal-icon">🦸</div>
+          <h3 class="portal-title">레전드 (Legends)</h3>
+          <p class="portal-desc">
+            어썰트, 스커미셔, 리콘, 서포트, 컨트롤러 5대 클래스 고유 특전과 패시브/전술/궁극기 스펙을 조회합니다.
+          </p>
+          <div class="portal-action">
+            <span>레전드 보기</span>
+            <span>➔</span>
+          </div>
+        </article>
+
+        <!-- Portal 3: TTK Calculator -->
+        <article class="portal-card card-orange" id="portal-calculator">
+          <div class="portal-icon">⚡</div>
+          <h3 class="portal-title">TTK 계산기 (Combat)</h3>
+          <p class="portal-desc">
+            화이트부터 레드 아머까지 적의 방어구와 헬멧 티어에 따른 킬 타임(초)과 원탄창 킬(One-Mag Kill) 여부를 시뮬레이션합니다.
+          </p>
+          <div class="portal-action">
+            <span>계산기 시작</span>
+            <span>➔</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Quick Info 2-Column Panel -->
+      <div class="info-columns">
+        
+        <!-- Left: Patch Highlights -->
+        <div class="info-panel">
+          <h3 class="info-panel-title">
+            <span>📢</span>
+            <span>최신 밸런스 패치 핫픽스 요약</span>
+          </h3>
+          <ul class="patch-list">
+            <li class="patch-item">
+              <span class="patch-tag buff">BUFF</span>
+              <span><strong>R-99 SMG</strong>: 기본 탄창 용량 30발 롤백 및 데미지 안정화</span>
+            </li>
+            <li class="patch-item">
+              <span class="patch-tag buff">BUFF</span>
+              <span><strong>VK-47 플랫라인</strong>: 원거리 탄속 감쇄율 10% 개선</span>
+            </li>
+            <li class="patch-item">
+              <span class="patch-tag nerf">NERF</span>
+              <span><strong>헴록 버스트 AR</strong>: 헤드샷 데미지 계수 1.75 ➔ 1.65 조정</span>
+            </li>
+            <li class="patch-item">
+              <span class="patch-tag adjust">ADJUST</span>
+              <span><strong>얼터네이터 SMG</strong>: 디스럽터 탄약 장착 시 실드 배율 재조정</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: Map Schedule -->
+        <div class="info-panel">
+          <h3 class="info-panel-title">
+            <span>🗺️</span>
+            <span>실시간 전장 로테이션</span>
+          </h3>
+          <div class="map-preview-card">
+            <div>
+              <div class="map-name">올림푸스 (Olympus)</div>
+              <div class="map-meta">배틀로얄 일반전 진행 중</div>
+            </div>
+            <span class="status-badge" style="color: var(--accent-orange); border-color: var(--accent-orange);">
+              24분 남음
+            </span>
+          </div>
+          <div class="map-preview-card">
+            <div>
+              <div class="map-name">세상의 끝 (World's Edge)</div>
+              <div class="map-meta">다음 예정 맵 (00:24:15 후)</div>
+            </div>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">대기 중</span>
+          </div>
+          <div class="map-preview-card">
+            <div>
+              <div class="map-name">스톰 포인트 (Storm Point)</div>
+              <div class="map-meta">랭크 리그 진행 맵</div>
+            </div>
+            <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 700;">RANKED</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────────────────
+         VIEW 2: WEAPONS DEX (PLAN-002)
+         ─────────────────────────────────────────────────────────────────────── -->
+    <section id="view-weapons" class="view-section hidden">
+      
+      <div class="filter-toolbar">
+        <!-- Class Filter -->
+        <div class="filter-group">
+          <span class="filter-label">총기 분류:</span>
+          <button class="filter-btn active" data-filter-type="class" data-value="ALL">전체</button>
+          <button class="filter-btn" data-filter-type="class" data-value="AR">AR</button>
+          <button class="filter-btn" data-filter-type="class" data-value="SMG">SMG</button>
+          <button class="filter-btn" data-filter-type="class" data-value="LMG">LMG</button>
+          <button class="filter-btn" data-filter-type="class" data-value="Marksman">Marksman</button>
+          <button class="filter-btn" data-filter-type="class" data-value="Sniper">Sniper</button>
+          <button class="filter-btn" data-filter-type="class" data-value="Shotgun">Shotgun</button>
+          <button class="filter-btn" data-filter-type="class" data-value="Pistol">Pistol</button>
+        </div>
+
+        <!-- Ammo Filter -->
+        <div class="filter-group">
+          <span class="filter-label">탄약 분류:</span>
+          <button class="filter-btn active" data-filter-type="ammo" data-value="ALL">전체</button>
+          <button class="filter-btn" data-filter-type="ammo" data-value="Light">경량 (Light)</button>
+          <button class="filter-btn" data-filter-type="ammo" data-value="Heavy">중량 (Heavy)</button>
+          <button class="filter-btn" data-filter-type="ammo" data-value="Energy">에너지 (Energy)</button>
+          <button class="filter-btn" data-filter-type="ammo" data-value="Sniper">스나이퍼 (Sniper)</button>
+          <button class="filter-btn" data-filter-type="ammo" data-value="Shotgun">샷건 (Shotgun)</button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="filter-group" style="margin-top: 0.25rem;">
+          <span class="filter-label">총기 검색:</span>
+          <input type="text" id="weapon-search" placeholder="총기 이름 검색 (예: R-99, 플랫라인, volt)..." 
+                 style="background: rgba(18, 19, 22, 0.8); border: 1px solid var(--border-panel); color: #FFF; padding: 0.5rem 1rem; clip-path: var(--chamfer-sm); width: 350px; font-family: var(--font-body); font-size: 0.95rem;">
+          <span id="weapon-count" style="font-family: var(--font-display); font-size: 1rem; color: var(--text-muted); margin-left: 0.5rem;">
+            29개 총기 표시 중
+          </span>
+        </div>
+      </div>
+
+      <!-- Weapons Card Grid (Filled dynamically by app.js) -->
+      <div class="weapons-grid" id="weapons-grid-container">
+        <!-- Dynamic Cards inserted here -->
+      </div>
+
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────────────────
+         VIEW 3: LEGENDS (Coming Soon Preview)
+         ─────────────────────────────────────────────────────────────────────── -->
+    <section id="view-legends" class="view-section hidden">
+      <div class="hero-banner" style="border-left-color: var(--accent-blue);">
+        <div class="hero-tag" style="color: var(--accent-blue);">SEASON 24 ROSTER</div>
+        <h2 class="hero-title">레전드 도감 (Legends)</h2>
+        <p class="hero-desc">
+          어썰트, 스커미셔, 리콘, 서포트, 컨트롤러 5대 클래스 특전 및 레전드별 패시브, 전술, 궁극기 상세 수치 데이터 파이프라인(Phase 2) 구축 준비 중입니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────────────────
+         VIEW 4: MAPS (Coming Soon Preview)
+         ─────────────────────────────────────────────────────────────────────── -->
+    <section id="view-maps" class="view-section hidden">
+      <div class="hero-banner" style="border-left-color: var(--ammo-light);">
+        <div class="hero-tag" style="color: var(--ammo-light);">BATTLE ROYALE &amp; MIXTAPE</div>
+        <h2 class="hero-title">맵 로테이션 (Maps &amp; Rotation)</h2>
+        <p class="hero-desc">
+          올림푸스, 세상의 끝, 킹스 캐년, 스톰 포인트, 디스트릭트 고화질 조감도 및 실시간 ALS Open API 연동(Phase 3) 준비 중입니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────────────────
+         VIEW 5: CALCULATOR (Coming Soon Preview)
+         ─────────────────────────────────────────────────────────────────────── -->
+    <section id="view-calculator" class="view-section hidden">
+      <div class="hero-banner" style="border-left-color: var(--accent-orange);">
+        <div class="hero-tag" style="color: var(--accent-orange);">TACTICAL COMBAT SIMULATOR</div>
+        <h2 class="hero-title">TTK &amp; DPS 실시간 계산기</h2>
+        <p class="hero-desc">
+          화이트~레드 아머 및 헬멧 티어에 따른 킬 타임 시뮬레이터(Phase 4) 준비 중입니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────────────────
+         VIEW 6: TIERLIST (Coming Soon Preview)
+         ─────────────────────────────────────────────────────────────────────── -->
+    <section id="view-tierlist" class="view-section hidden">
+      <div class="hero-banner" style="border-left-color: var(--ammo-mythic);">
+        <div class="hero-tag" style="color: var(--ammo-mythic);">TIER LIST MAKER</div>
+        <h2 class="hero-title">유저 커스텀 티어표 메이커</h2>
+        <p class="hero-desc">
+          드래그 &amp; 드롭으로 나만의 S~F 티어표를 만들고 고화질 PNG 이미지로 저장하는 커뮤니티 기능(Phase 4) 준비 중입니다.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- In-Game Styled Tactical Footer -->
+  <footer class="apex-footer" style="border-top: 1px solid var(--border-panel); padding: 2rem 2.5rem; margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+    <div style="max-width: 1440px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+      <p>
+        Apex Info is a non-commercial, fan-made tactical intelligence dashboard. Not affiliated with or endorsed by Electronic Arts Inc. or Respawn Entertainment.
+      </p>
+      <p>
+        Game assets &amp; data &copy; Electronic Arts / Respawn. Crafted with care under EA's Fan Content Policy.
+        <a href="./CREDITS.md" target="_blank" style="color: var(--accent-orange); text-decoration: none; margin-left: 0.5rem; font-weight: 600;">[ CREDITS &amp; LICENSES ]</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="./src/app.js?v=1.0.0"></script>
+</body>
+</html>

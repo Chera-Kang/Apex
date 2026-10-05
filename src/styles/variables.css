@@ -1,0 +1,64 @@
+/* ==============================================================================
+   Apex Legends Theme Variables & Design Tokens (PLAN-000)
+   ============================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@500;600;700;800&display=swap');
+
+:root {
+  /* Surface & Background */
+  --bg-main: #121316;
+  --bg-surface: #1A1C20;
+  --bg-surface-elevated: #24272D;
+  --bg-surface-glass: rgba(26, 28, 32, 0.85);
+  --border-panel: #2F343B;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Apex In-Game Accent Colors */
+  --accent-red: #DA292A;
+  --accent-red-glow: rgba(218, 41, 42, 0.35);
+  --accent-orange: #FF5E1E;
+  --accent-orange-glow: rgba(255, 94, 30, 0.3);
+  --accent-blue: #00E5FF;
+  --accent-blue-glow: rgba(0, 229, 255, 0.25);
+  --accent-green: #22C55E;
+
+  /* Ammo Colors */
+  --ammo-light: #FF9800;
+  --ammo-heavy: #00B0FF;
+  --ammo-energy: #AEEA00;
+  --ammo-sniper: #7C4DFF;
+  --ammo-shotgun: #F50057;
+  --ammo-mythic: #E040FB;
+
+  /* Typography */
+  --font-display: 'Rajdhani', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+
+  /* HUD Styling */
+  --chamfer-sm: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  --chamfer-md: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  --chamfer-lg: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}

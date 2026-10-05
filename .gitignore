@@ -2,7 +2,6 @@
 # 보안 및 비공개 인증 파일 (절대 커밋 금지)
 # ==========================================
 config/auth/*.json
-precondition/auth/*.json
 auth/*.json
 *.json.key
 *.pem
@@ -14,8 +13,6 @@ auth/*.json
 !.env.example
 config/.env
 !config/.env.example
-precondition/.env
-!precondition/.env.example
 
 # ==========================================
 # Python 가상환경 및 캐시
@@ -53,7 +50,9 @@ yarn-error.log*
 # 개인 메모 및 할 일 (Git 추적 방지)
 # ==========================================
 todo.txt
+todo*.txt
 TODO.txt
 *.todo
 notes/
+
 
