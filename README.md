@@ -24,21 +24,21 @@
 
 ```mermaid
 graph LR
-    subgraph 1. 기획 (Spec)
-        A[PRD & User Story] --> B[Data Contract 스키마]
-        B --> C[Acceptance Criteria 정의]
+    subgraph Spec["1. 기획 (Spec)"]
+        A["PRD & User Story"] --> B["Data Contract 스키마"]
+        B --> C["Acceptance Criteria 정의"]
     end
 
-    subgraph 2. 개발 (Dev)
-        D[Wiki Mining ETL] --> E[정규화 JSON/CSV 산출]
-        E --> F[Pure Logic 계산 모듈 격리]
-        F --> G[HUD UI 대시보드 연동]
+    subgraph Dev["2. 개발 (Dev)"]
+        D["Wiki Mining ETL"] --> E["정규화 JSON/CSV 산출"]
+        E --> F["Pure Logic 계산 모듈 격리"]
+        F --> G["HUD UI 대시보드 연동"]
     end
 
-    subgraph 3. 검증 (QA)
-        H[verify_weapons.py] --> I{Data Quality Gate}
-        I -->|수학적 불변성 검증| J[Pass: 프로덕션 배포]
-        I -->|패치/오타 감지 실패| K[Fail: 리포트 및 격리]
+    subgraph QA["3. 검증 (QA)"]
+        H["verify_weapons.py"] --> I{"Data Quality Gate"}
+        I -->|"수학적 불변성 검증"| J["Pass: 프로덕션 배포"]
+        I -->|"패치/오타 감지 실패"| K["Fail: 리포트 및 격리"]
     end
 
     C --> D
